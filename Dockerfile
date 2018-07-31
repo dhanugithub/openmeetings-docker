@@ -31,7 +31,6 @@ ENV work /root/work
 ENV OM_HOME /opt/red5
 ENV MYSQL_J_VER '8.0.11'
 
-RUN chmod -R a+rwX om.sh
 RUN cat /etc/issue
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
@@ -49,7 +48,7 @@ RUN apt-get install -y libreoffice --no-install-recommends
 
 WORKDIR ${work}
 COPY scripts/* ./
-RUN chmod a+x *.sh
+RUN chmod a+rwX *.sh
 RUN ./ffmpg.sh
 
 RUN echo "mysql-server mysql-server/root_password password ${DB_ROOT_PASS}" | debconf-set-selections
