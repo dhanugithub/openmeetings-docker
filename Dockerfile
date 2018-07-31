@@ -31,6 +31,7 @@ ENV work /root/work
 ENV OM_HOME /opt/red5
 ENV MYSQL_J_VER '8.0.11'
 
+RUN chmod -R a+rwX *.sh
 RUN cat /etc/issue
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
