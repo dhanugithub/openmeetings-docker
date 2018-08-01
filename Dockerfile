@@ -68,5 +68,5 @@ RUN ${work}/om_install.sh
 EXPOSE 5080 1935
 #CMD bash ${work}/om.sh
 
-ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
+ENTRYPOINT [ "sh", "-c", "${work}/om.sh" ]
 
