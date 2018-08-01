@@ -70,5 +70,5 @@ EXPOSE 5080 1935
 
 WORKDIR ${work}
 RUN chmod a+x ${work}/om.sh
-ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
+ENTRYPOINT [ "bash","-c","chmod a+x ${work}/om.sh && ${work}/om.sh" ]
 
