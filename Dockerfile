@@ -48,7 +48,7 @@ RUN apt-get install -y libreoffice --no-install-recommends
 
 WORKDIR ${work}
 COPY scripts/* ./
-RUN chmod a+rwX *.sh
+RUN chmod a+x *.sh
 RUN ./ffmpg.sh
 
 RUN echo "mysql-server mysql-server/root_password password ${DB_ROOT_PASS}" | debconf-set-selections
@@ -68,5 +68,6 @@ RUN ${work}/om_install.sh
 EXPOSE 5080 1935
 #CMD bash ${work}/om.sh
 
+RUN chmod a+x ${work}/om.sh
 ENTRYPOINT [ "sh", "-c", "${work}/om.sh" ]
 
