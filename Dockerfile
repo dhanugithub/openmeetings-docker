@@ -27,7 +27,7 @@ ENV OM_DB_USER 'om_admin'
 ENV OM_DB_PASS '12345'
 ENV OM_USER 'om_admin'
 ENV OM_PASS '1Q2w3e4r5t^y'
-ENV work /root/work
+ENV work /home/openmeetings
 ENV OM_HOME /opt/red5
 ENV MYSQL_J_VER '8.0.11'
 
@@ -69,8 +69,9 @@ EXPOSE 5080 1935
 #CMD bash ${work}/om.sh
 
 WORKDIR ${work}
-USER dhanashree
-RUN chown -R dhanashree:dhanashree om.sh
+RUN useradd -ms /bin/bash openmeetings
+USER openmeetings
+RUN chown -R openmeetings:openmeetings om.sh
 RUN chmod -R 777 om.sh
 ENTRYPOINT [ "bash","-c","${work}/om.sh" ]
 
