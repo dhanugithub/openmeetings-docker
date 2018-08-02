@@ -69,6 +69,8 @@ EXPOSE 5080 1935
 #CMD bash ${work}/om.sh
 
 WORKDIR ${work}
-RUN chmod a+x om.sh
+RUN chown -R openmeetings:openmeetings om.sh
+RUN chmod -R 777 om.sh
+USER openmeetings
 ENTRYPOINT [ "bash","-c","${work}/om.sh" ]
 
