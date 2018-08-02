@@ -32,6 +32,7 @@ ENV OM_HOME /opt/red5
 ENV MYSQL_J_VER '8.0.11'
 
 RUN cat /etc/issue
+RUN useradd -ms /bin/bash openmeetings
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
@@ -69,7 +70,6 @@ EXPOSE 5080 1935
 #CMD bash ${work}/om.sh
 
 WORKDIR ${work}
-#RUN useradd -ms /bin/bash openmeetings
 USER openmeetings
 RUN chown -R openmeetings:openmeetings om.sh
 RUN chmod -R 777 om.sh
