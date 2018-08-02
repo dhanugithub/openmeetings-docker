@@ -70,8 +70,8 @@ EXPOSE 5080 1935
 
 WORKDIR ${work}
 #RUN useradd -ms /bin/bash openmeetings
+USER openmeetings
 RUN chown -R openmeetings:openmeetings om.sh
 RUN chmod -R 777 om.sh
-USER openmeetings
 ENTRYPOINT [ "bash","-c","${work}/om.sh" ]
 
