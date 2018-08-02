@@ -27,12 +27,11 @@ ENV OM_DB_USER 'om_admin'
 ENV OM_DB_PASS '12345'
 ENV OM_USER 'om_admin'
 ENV OM_PASS '1Q2w3e4r5t^y'
-ENV work /home/openmeetings
+ENV work /root/work
 ENV OM_HOME /opt/red5
 ENV MYSQL_J_VER '8.0.11'
 
 RUN cat /etc/issue
-RUN useradd -ms /bin/bash openmeetings
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
@@ -69,9 +68,5 @@ RUN ${work}/om_install.sh
 EXPOSE 5080 1935
 #CMD bash ${work}/om.sh
 
-WORKDIR ${work}
-USER openmeetings
-RUN chown -R openmeetings:openmeetings om.sh
-RUN chmod -R 777 om.sh
-ENTRYPOINT [ "bash","-c","${work}/om.sh" ]
+ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
 
