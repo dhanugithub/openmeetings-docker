@@ -67,6 +67,7 @@ RUN ${work}/om_install.sh
 
 EXPOSE 5080 1935
 #CMD bash ${work}/om.sh
-
+RUN chown -R 1001:0 ${work}
+USER 1001
 ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
 
