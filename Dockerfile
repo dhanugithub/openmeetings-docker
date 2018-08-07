@@ -48,6 +48,7 @@ RUN apt-get install -y libreoffice --no-install-recommends
 
 WORKDIR ${work}
 COPY scripts/* ./
+USER root
 RUN chown -R ubuntu:ubuntu ${work}/ffmpeg.sh && chmod -R g+rw ${work}/ffmpeg.sh && chown -R ubuntu:ubuntu ${work}/om_install.sh && chmod -R g+rw ${work}/om_install.sh && chown -R ubuntu:ubuntu ${work}/om.sh && chmod -R g+rw ${work}/om.sh
 RUN ./ffmpg.sh
 
