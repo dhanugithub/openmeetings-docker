@@ -45,7 +45,7 @@ RUN echo 'oracle-java8-installer shared/accepted-oracle-license-v1-1 seen true' 
 RUN apt-get install -y oracle-java8-installer
 
 RUN apt-get install -y libreoffice --no-install-recommends
-RUN apt-get install -y sudo && adduser ubuntu && echo "ubuntu ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu && chmod 0440 /etc/sudoers.d/ubuntu
+RUN apt-get install -y sudo && adduser ubuntu && echo "ubuntu ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu && chmod 4755 /etc/sudoers.d/ubuntu
 RUN su - ubuntu
 
 WORKDIR ${work}
