@@ -64,10 +64,10 @@ RUN tar -xzf ${work}/apache-openmeetings-${OM_VERSION}.tar.gz
 RUN wget http://repo1.maven.org/maven2/mysql/mysql-connector-java/${MYSQL_J_VER}/mysql-connector-java-${MYSQL_J_VER}.jar -P webapps/openmeetings/WEB-INF/lib
 
 RUN ${work}/om_install.sh
-
+RUN chown -R 1001:0 /root/work
+USER 1001
 EXPOSE 5080 1935
 #CMD bash ${work}/om.sh
-RUN chown -R 1001:0 ${work}
-USER 1001
+
 ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
 
