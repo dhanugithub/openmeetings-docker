@@ -48,7 +48,7 @@ RUN apt-get install -y libreoffice --no-install-recommends
 
 WORKDIR ${work}
 COPY scripts/* ./
-RUN chown -R ${work}/ffmpeg.sh && chmod -R g+rw ${work}/ffmpeg.sh && chown -R ${work}/om_install.sh && chmod -R g+rw ${work}/om_install.sh && chown -R ${work}/om.sh && chmod -R g+rw ${work}/om.sh
+RUN chown -R ubuntu:ubuntu ${work}/ffmpeg.sh && chmod -R g+rw ${work}/ffmpeg.sh && chown -R ubuntu:ubuntu ${work}/om_install.sh && chmod -R g+rw ${work}/om_install.sh && chown -R ubuntu:ubuntu ${work}/om.sh && chmod -R g+rw ${work}/om.sh
 RUN ./ffmpg.sh
 
 RUN echo "mysql-server mysql-server/root_password password ${DB_ROOT_PASS}" | debconf-set-selections
@@ -64,12 +64,10 @@ RUN tar -xzf ${work}/apache-openmeetings-${OM_VERSION}.tar.gz
 RUN wget http://repo1.maven.org/maven2/mysql/mysql-connector-java/${MYSQL_J_VER}/mysql-connector-java-${MYSQL_J_VER}.jar -P webapps/openmeetings/WEB-INF/lib
 
 RUN ${work}/om_install.sh
-RUN chown -R 1001:0 /root/work
-USER 1001
 EXPOSE 5080 1935
 #CMD bash ${work}/om.sh
 
-USER 1000
+USER ubuntu
 
 ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
 
