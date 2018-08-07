@@ -45,11 +45,11 @@ RUN echo 'oracle-java8-installer shared/accepted-oracle-license-v1-1 seen true' 
 RUN apt-get install -y oracle-java8-installer
 
 RUN apt-get install -y libreoffice --no-install-recommends
+RUN apt-get install -y sudo && adduser ubuntu && echo "ubuntu ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu && chmod 0440 /etc/sudoers.d/ubuntu
+RUN su - ubuntu
 
 WORKDIR ${work}
 COPY scripts/* ./
-USER root
-RUN chown -R ubuntu:ubuntu ${work}/ffmpeg.sh && chmod -R g+rw ${work}/ffmpeg.sh && chown -R ubuntu:ubuntu ${work}/om_install.sh && chmod -R g+rw ${work}/om_install.sh && chown -R ubuntu:ubuntu ${work}/om.sh && chmod -R g+rw ${work}/om.sh
 RUN ./ffmpg.sh
 
 RUN echo "mysql-server mysql-server/root_password password ${DB_ROOT_PASS}" | debconf-set-selections
@@ -67,8 +67,6 @@ RUN wget http://repo1.maven.org/maven2/mysql/mysql-connector-java/${MYSQL_J_VER}
 RUN ${work}/om_install.sh
 EXPOSE 5080 1935
 #CMD bash ${work}/om.sh
-
-USER ubuntu
 
 ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
 
