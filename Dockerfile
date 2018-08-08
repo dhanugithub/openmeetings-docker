@@ -47,7 +47,7 @@ RUN apt-get install -y libreoffice --no-install-recommends
 
 
 RUN useradd -d /home/ubuntu -ms /bin/bash ubuntu && echo "ubuntu ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu && chmod 0440 /etc/sudoers.d/ubuntu
-USER ubuntu
+
 #RUN su - ubuntu
 
 WORKDIR ${work}
@@ -69,5 +69,5 @@ RUN wget http://repo1.maven.org/maven2/mysql/mysql-connector-java/${MYSQL_J_VER}
 RUN ${work}/om_install.sh
 
 EXPOSE 5080 1935
-
+USER ubuntu
 ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
